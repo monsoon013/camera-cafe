@@ -12,6 +12,17 @@ public class Cafe {
         this.gLeche = gLeche;
     }
 
+    //getters
+
+    public String getNombre() { return nombre; }
+    public int getGCafe(){ return gCafe; }
+    public int getGCacao(){ return gCacao; }
+    public int getGLeche(){ return gLeche; }
+
     
+
+    public String formatToFile(){
+        return nombre + ", " + gCafe + ", " + gCacao + ", " + gLeche;
+    } 
     
 }
