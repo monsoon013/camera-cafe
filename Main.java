@@ -40,6 +40,11 @@ public class Main {
                         break;
                     }
                     case 2: {
+                        if(cameraCafe.getCafes().isEmpty()){
+                            System.out.println("No hay recetas disponibles. Añade una.");
+                            break;
+                        }
+
                         System.out.println("## MENÚ ##");
                         int count = 1;
                         for (Cafe c : cameraCafe.getCafes()){

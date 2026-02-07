@@ -40,6 +40,7 @@ public class Maquina {
             return;
         }
 
+
         Cafe c = cafes.get(indice);
         int aguaNecesaria = c.getGCafe() + c.getGCacao() + c.getGLeche();
 
