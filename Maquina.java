@@ -16,8 +16,7 @@ public class Maquina {
 
     private final int MAX_CAP = 1000;
 
-    public Maquina (String numeroSerie, ArrayList<Cafe> cafes, int vasos, 
-                    int gCafe, int gCacao, int gLeche, int mlAgua ){
+    public Maquina (String numeroSerie){
         this.numeroSerie = numeroSerie;
         this.cafes = new ArrayList<>();
         this.vasos = 5;
@@ -74,7 +73,52 @@ public class Maquina {
         this.mlAgua -= agua;
     }
 
-    public void añadirHistorial(Cafe c){
+    public void rellenarIngredientes(int op, int cantidad){
+        if (cantidad <= 0 ){
+            //Así como el return actúa más para fallos de flujo/programación, IllegalArgumentException funciona más para errores que cometa el usuario al usar el programa.
+            throw new IllegalArgumentException("Error al añadir. La cantidad tiene que ser positiva"); 
+        }
+
+        switch(op){
+            case 1:{
+                verificarEspacio(cantidad, gCafe, MAX_CAP, "café");
+                gCafe += cantidad;
+                break;
+            }
+            case 2:{
+                verificarEspacio(cantidad, gCacao, MAX_CAP, "cacao");
+                gCacao += cantidad;
+                break;
+            }
+            case 3: {
+                verificarEspacio(cantidad, gLeche, MAX_CAP, "leche");
+                gLeche += cantidad;
+                break;
+            }
+            case 4: {
+                verificarEspacio(cantidad, mlAgua, MAX_CAP, "agua");
+                mlAgua += cantidad;
+                break;
+            }
+            case 5: {
+                verificarEspacio(cantidad, vasos, 100, "vasos");
+                vasos += cantidad;
+                break;
+            }
+            default: {
+                throw new IllegalArgumentException("Opción no válida");
+            }
+        }
+    }
+    
+    //Evitar ifs reiterativos para comprobar la capacidad
+    private void verificarEspacio(int cant_Act, int cant_Add, int max, String nombre){
+        if(cant_Act + cant_Add > max){
+            throw new IllegalArgumentException("La cantidad excede la capacidad de " + nombre);
+        }
+    }
+
+    private void añadirHistorial(Cafe c){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFich, true))){
             bw.write(c.formatToFile());
             bw.newLine();
@@ -84,11 +128,14 @@ public class Maquina {
         }
     }
 
-    public int rellenarIngredientes(int ingrediente){
-        int op = 0;
-        Scanner sc = new Scanner(System.in);
-        
-        
+    public void mostrarStock(){
+        System.out.println("# STOCK # \n" 
+                          + "[CAFÉ " + gCafe + "]\n" 
+                          + "[CACAO " + gCacao + "]\n" 
+                          + "[LECHE " + gLeche + "]\n"
+                          + "[AGUA " + mlAgua + "]\n"
+                          + "[VASOS " + vasos + "]");
     }
-    
+
+
 }
