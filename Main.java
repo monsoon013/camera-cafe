@@ -10,14 +10,15 @@ public class Main {
         int op = 0; 
 
 
-        while(op < 4){
+        while(op < 6){
             try { //Envolver todo en un try catch para recoger todo tipo de errores del usuario.
                 System.out.println("### BIENVENIDX ###");
                 System.out.println("1. Añadir Café");
                 System.out.println("2. Pedir Café");
                 System.out.println("3. Agregar Ingredientes");
                 System.out.println("4. Ver Historial");
-                System.out.println("5. Salir");
+                System.out.println("5. Mostrar Recursos");
+                System.out.println("6. Salir");
                 System.out.println("➤ ¿Qué deseas hacer?");
 
                 op = sc.nextInt();
@@ -39,10 +40,16 @@ public class Main {
                         break;
                     }
                     case 2: {
-                        cameraCafe.getCafes();
+                        System.out.println("## MENÚ ##");
+                        int count = 1;
+                        for (Cafe c : cameraCafe.getCafes()){
+                            System.out.println(count + ". " + c.getNombre());
+                            count++;
+                        }
+
                         System.out.println("¿Qué café deseas?");
                         int desCafe = sc.nextInt();
-                        cameraCafe.pedirCafe(desCafe);
+                        cameraCafe.pedirCafe(desCafe - 1); //para acceder a la posición correcta. Es decir, al teclear 1 te llevaría a la posición 1, no a la PRIMERA.
                         break;
                     }
                     case 3:{
@@ -65,7 +72,6 @@ public class Main {
                         }catch(IllegalArgumentException e){
                             System.out.println("Error al rellenar: " + e.getMessage());
                         }
-
                         break;
                     }
                     case 4: {
@@ -73,13 +79,17 @@ public class Main {
                         System.out.println("### HISTORIAL DE VENTAS ###");
                         try (BufferedReader br = new BufferedReader(new FileReader("historial_cafe.txt"))){
                             String linea;
-                            while((linea = br.readLine()) != null){ System.out.println(linea);}
+                            while((linea = br.readLine()) != null) System.out.println(linea);
                         } catch(FileNotFoundException e){
                             System.out.println("Aún no hubo ventas.");
                         }
                         break;
                     }
                     case 5: {
+                        cameraCafe.mostrarStock();
+                        break;
+                    }
+                    case 6: {
                         System.out.println("Saliendo...");
                         break;
                     }
