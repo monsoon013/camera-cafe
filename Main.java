@@ -10,7 +10,7 @@ public class Main {
         int op = 0; 
 
 
-        while(op < 6){
+        while(op < 7){
             try { //Envolver todo en un try catch para recoger todo tipo de errores del usuario.
                 System.out.println("### BIENVENIDX ###");
                 System.out.println("1. Añadir Café");
@@ -18,7 +18,8 @@ public class Main {
                 System.out.println("3. Agregar Ingredientes");
                 System.out.println("4. Ver Historial");
                 System.out.println("5. Mostrar Recursos");
-                System.out.println("6. Salir");
+                System.out.println("6. Ver Recaudación");
+                System.out.println("7. Salir");
                 System.out.println("➤ ¿Qué deseas hacer?");
 
                 op = sc.nextInt();
@@ -34,8 +35,10 @@ public class Main {
                         int gramLech = sc.nextInt();
                         System.out.println("Gramos de cacao: ");
                         int gramCacao = sc.nextInt();
+                        System.out.println("Precio del café:");
+                        double precioCafe = sc.nextDouble();
 
-                        Cafe c = new Cafe(nomCaf, gramCaf, gramCacao, gramLech);
+                        Cafe c = new Cafe(nomCaf, gramCaf, gramCacao, gramLech, precioCafe);
                         cameraCafe.agregarReceta(c);
                         break;
                     }
@@ -48,7 +51,7 @@ public class Main {
                         System.out.println("## MENÚ ##");
                         int count = 1;
                         for (Cafe c : cameraCafe.getCafes()){
-                            System.out.println(count + ". " + c.getNombre());
+                            System.out.println(count + ". " + c.getNombre() + " - " + c.getPrecio());
                             count++;
                         }
 
@@ -95,6 +98,10 @@ public class Main {
                         break;
                     }
                     case 6: {
+                       System.out.println(cameraCafe.getRecaudTotal()); 
+                        break;
+                    }
+                    case 7: {
                         System.out.println("Saliendo...");
                         break;
                     }

@@ -1,10 +1,8 @@
 import java.io.*;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 
 public class Maquina {
-
     private String numeroSerie;
     private ArrayList<Cafe> cafes;
     private int vasos;
@@ -12,6 +10,7 @@ public class Maquina {
     private int gLeche;
     private int gCacao;
     private int mlAgua;
+    private double recaudacionTotal;
     private String nombreFich = "historial_cafe.txt";
 
     private final int MAX_CAP = 1000;
@@ -24,6 +23,7 @@ public class Maquina {
         this.gCacao = 100;
         this.gLeche = 600;
         this.mlAgua = 800;
+        this.recaudacionTotal = 0.0;
     }
 
     public void agregarReceta(Cafe c){
@@ -33,6 +33,8 @@ public class Maquina {
     public ArrayList<Cafe> getCafes(){
         return cafes;
     }
+
+    public String  getRecaudTotal(){return "La máquina ha recaudado " + recaudacionTotal ;}
 
     public void pedirCafe (int indice){
         if(indice < 0 || indice >= cafes.size()){
@@ -51,6 +53,7 @@ public class Maquina {
         }
 
         consumirIngredientes(c, aguaNecesaria);
+        recaudacionTotal  +=   c.getPrecio();
 
         System.out.println("Su café está siendo preparado...");
         añadirHistorial(c);
@@ -63,7 +66,7 @@ public class Maquina {
         if(c.getGLeche() > gLeche) { return "No queda leche.";}
         if(agua > mlAgua){ return "No queda agua.";}
 
-        return null;
+        return null; //retornar un error vacío como indicando que está todo correcto
     }
 
     private void consumirIngredientes(Cafe c, int agua){

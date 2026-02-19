@@ -1,2 +1,18 @@
 Capuccino, 5, 0, 5
 Capuccino, 5, 0, 5
+Espresso, 5, 0, 0,  1.5
+Latte, 5, 0, 5,  1.75
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
+Latte, 5, 0, 5,  1.75
+Espresso, 5, 0, 0,  1.5
+Espresso, 5, 0, 0,  1.5
