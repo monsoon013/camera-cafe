@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Maquina {
     private String numeroSerie;
-    private ArrayList<Cafe> cafes;
+    private ArrayList<Cafe> cafes; 
     private int vasos;
     private int gCafe;
     private int gLeche;
@@ -13,9 +13,9 @@ public class Maquina {
     private double recaudacionTotal;
     private String nombreFich = "historial_cafe.txt";
 
-    private final int MAX_CAP = 1000;
+    private final int MAX_CAP = 1000; //constante con la capacidad máxima de cada cosa
 
-    public Maquina (String numeroSerie){
+    public Maquina (String numeroSerie){ //constructor solo con el número de serie
         this.numeroSerie = numeroSerie;
         this.cafes = new ArrayList<>();
         this.vasos = 5;
@@ -30,6 +30,7 @@ public class Maquina {
         cafes.add(c);
     }
 
+    //getter
     public ArrayList<Cafe> getCafes(){
         return cafes;
     }
@@ -38,17 +39,17 @@ public class Maquina {
 
     public void pedirCafe (int indice){
         if(indice < 0 || indice >= cafes.size()){
-            System.out.println("No existe el café seleccionado");
+            System.out.println("No existe el café seleccionado"); 
             return;
         }
 
 
         Cafe c = cafes.get(indice);
-        int aguaNecesaria = c.getGCafe() + c.getGCacao() + c.getGLeche();
+        int aguaNecesaria = c.getGCafe() + c.getGCacao() + c.getGLeche(); //Fórmula para conseguir el agua necesaria
 
-        String error = comprobarStock(c, aguaNecesaria);
+        String error = comprobarStock(c, aguaNecesaria); //mandar el café pedido y el agua que necesite
         if(error != null){
-            System.out.println("No se puede servir :( | " + error);
+            System.out.println("No se puede servir :( | " + error); //En caso de que falte algo, mostrar que no se puede servir
             return;
         }
 
@@ -69,12 +70,12 @@ public class Maquina {
         return null; //retornar un error vacío como indicando que está todo correcto
     }
 
-    private void consumirIngredientes(Cafe c, int agua){
-        this.vasos--;
-        this.gCafe -= c.getGCafe();
+    private void consumirIngredientes(Cafe c, int agua){ //Pasar el café y el agua necesaria obtenida en pedirCafe
+        this.vasos--; //resta el vaso
+        this.gCafe -= c.getGCafe(); //resta los gramos que necesite el café
         this.gCacao -= c.getGCacao();
         this.gLeche -= c.getGLeche();
-        this.mlAgua -= agua;
+        this.mlAgua -= agua; //resta el agua
     }
 
     public void rellenarIngredientes(int op, int cantidad){
@@ -85,8 +86,8 @@ public class Maquina {
 
         switch(op){
             case 1:{
-                verificarEspacio(cantidad, gCafe, MAX_CAP, "café");
-                gCafe += cantidad;
+                verificarEspacio(cantidad, gCafe, MAX_CAP, "café"); //llamar al método para poder comprobar que se puede realizar
+                gCafe += cantidad; //En caso de que sí se pueda, pues sumar la cantidad que ya hay con la cantidad a añadir
                 break;
             }
             case 2:{
@@ -105,7 +106,7 @@ public class Maquina {
                 break;
             }
             case 5: {
-                verificarEspacio(cantidad, vasos, 100, "vasos");
+                verificarEspacio(cantidad, vasos, 100, "vasos"); //el máximo de vasos que sea 100
                 vasos += cantidad;
                 break;
             }
@@ -117,18 +118,18 @@ public class Maquina {
     
     //Evitar ifs reiterativos para comprobar la capacidad
     private void verificarEspacio(int cant_Act, int cant_Add, int max, String nombre){
-        if(cant_Act + cant_Add > max){
-            throw new IllegalArgumentException("La cantidad excede la capacidad de " + nombre);
+        if(cant_Act + cant_Add > max){ //Si la suma de la cantidad que ya hay entre la suma de lo que se quiere añadir es mayor que el máximo puesto
+            throw new IllegalArgumentException("La cantidad excede la capacidad de " + nombre); //devolver el error
         }
     }
 
     private void añadirHistorial(Cafe c){
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFich, true))){
-            bw.write(c.formatToFile());
-            bw.newLine();
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFich, true))){ //Crear el fichero para el historial de cafés
+            bw.write(c.formatToFile()); //Escribir la cadena en el fichero
+            bw.newLine(); //Espacio
             System.out.println("Venta registrada correctamente.");
         } catch (IOException e){
-            System.out.println("Error al registrar la venta: " + e.getMessage());
+            System.out.println("Error al registrar la venta: " + e.getMessage()); //Si no se puede, que muestre el error
         }
     }
 
