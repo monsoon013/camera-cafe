@@ -6,13 +6,7 @@ public class Cafe {
     private int gLeche;
     public  double precio;
 
-<<<<<<< HEAD
     public Cafe (String nombre, int gCafe, int gCacao, int gLeche, double precio){
-=======
-    //Creamos el constructor
-
-    public Cafe (String nombre, int gCafe, int gCacao, int gLeche){
->>>>>>> ff96161ba902cd0203d3d5eba9fc240e328e3723
         this.nombre = nombre;
         this.gCafe = gCafe;
         this.gCacao = gCacao;

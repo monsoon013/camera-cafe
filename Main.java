@@ -18,14 +18,9 @@ public class Main {
                 System.out.println("3. Agregar Ingredientes");
                 System.out.println("4. Ver Historial");
                 System.out.println("5. Mostrar Recursos");
-<<<<<<< HEAD
                 System.out.println("6. Ver Recaudación");
                 System.out.println("7. Salir");
                 System.out.println("➤ ¿Qué deseas hacer?");
-=======
-                System.out.println("6. Salir");
-                System.out.println("¿Qué deseas hacer?");
->>>>>>> ff96161ba902cd0203d3d5eba9fc240e328e3723
 
                 op = sc.nextInt();
                 sc.nextLine(); //limpieza del buffer
@@ -39,19 +34,12 @@ public class Main {
                         System.out.println("Gramos de leche: ");
                         int gramLech = sc.nextInt();
                         System.out.println("Gramos de cacao: ");
-<<<<<<< HEAD
                         int gramCacao = sc.nextInt();
                         System.out.println("Precio del café:");
                         double precioCafe = sc.nextDouble();
 
                         Cafe c = new Cafe(nomCaf, gramCaf, gramCacao, gramLech, precioCafe);
                         cameraCafe.agregarReceta(c);
-=======
-                        int gramCacao = sc.nextInt(); 
-
-                        Cafe c = new Cafe(nomCaf, gramCaf, gramCacao, gramLech); //Pasar las variables independientes
-                        cameraCafe.agregarReceta(c); //agregamos el café a las recetas
->>>>>>> ff96161ba902cd0203d3d5eba9fc240e328e3723
                         break;
                     }
                     case 2: {
@@ -61,17 +49,10 @@ public class Main {
                         }
 
                         System.out.println("## MENÚ ##");
-<<<<<<< HEAD
                         int count = 1;
                         for (Cafe c : cameraCafe.getCafes()){
                             System.out.println(count + ". " + c.getNombre() + " - " + c.getPrecio());
                             count++;
-=======
-                        int count = 1; //contador para que salga como 1. {cafe} 2.{cafe}
-                        for (Cafe c : cameraCafe.getCafes()){ //Mostrar cada café
-                            System.out.println(count + ". " + c.getNombre());
-                            count++; //Ir sumando uno por cada café
->>>>>>> ff96161ba902cd0203d3d5eba9fc240e328e3723
                         }
 
                         System.out.println("¿Qué café deseas?");
