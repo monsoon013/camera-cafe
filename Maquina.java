@@ -77,7 +77,7 @@ public class Maquina {
     }
 
     public String comprobarCafes (int cafesPedidos) {
-        if(cafesPedidos >= MAX_CAF_DIA){ 
+        if(cafesPedidos == MAX_CAF_DIA){ 
             return "No puedes pedir más cafés por hoy.";
         }
         return null;
