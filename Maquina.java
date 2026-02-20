@@ -10,10 +10,13 @@ public class Maquina {
     private int gLeche;
     private int gCacao;
     private int mlAgua;
+    private int gCanela;
+    private int historial;
     private double recaudacionTotal;
     private String nombreFich = "historial_cafe.txt";
 
     private final int MAX_CAP = 1000; //constante con la capacidad máxima de cada cosa
+    private final int MAX_CAF_DIA = 10;
 
     public Maquina (String numeroSerie){ //constructor solo con el número de serie
         this.numeroSerie = numeroSerie;
@@ -23,7 +26,9 @@ public class Maquina {
         this.gCacao = 100;
         this.gLeche = 600;
         this.mlAgua = 800;
-        this.recaudacionTotal = 0.0;
+        this.gCanela = 500;
+        this.historial = 0;
+        this.recaudacionTotal = 0;
     }
 
     public void agregarReceta(Cafe c){
@@ -35,7 +40,13 @@ public class Maquina {
         return cafes;
     }
 
-    public String  getRecaudTotal(){return "La máquina ha recaudado " + recaudacionTotal ;}
+    public int getHistorial(){
+        return historial;
+    }
+
+    public double getRecaudacionTotal(){
+        return recaudacionTotal;
+    }
 
     public void pedirCafe (int indice){
         if(indice < 0 || indice >= cafes.size()){
@@ -43,21 +54,32 @@ public class Maquina {
             return;
         }
 
-
+        String limiteCafes = comprobarCafes(historial);
+        if(limiteCafes != null){
+            System.out.println("No puedes pedir más cafés. Vuelve mañana :(");
+            return;
+        }
         Cafe c = cafes.get(indice);
-        int aguaNecesaria = c.getGCafe() + c.getGCacao() + c.getGLeche(); //Fórmula para conseguir el agua necesaria
+        int aguaNecesaria = c.getGCafe() + c.getGCacao() + c.getGLeche() + c.getGCanela(); //Fórmula para conseguir el agua necesaria
 
         String error = comprobarStock(c, aguaNecesaria); //mandar el café pedido y el agua que necesite
         if(error != null){
             System.out.println("No se puede servir :( | " + error); //En caso de que falte algo, mostrar que no se puede servir
             return;
-        }
-
-        consumirIngredientes(c, aguaNecesaria);
-        recaudacionTotal  +=   c.getPrecio();
+        }      
 
         System.out.println("Su café está siendo preparado...");
         añadirHistorial(c);
+        consumirIngredientes(c, aguaNecesaria);  
+        historial++;    
+        recaudacionTotal += c.getPrecio();       
+    }
+
+    public String comprobarCafes (int cafesPedidos) {
+        if(cafesPedidos >= MAX_CAF_DIA){ 
+            return "No puedes pedir más cafés por hoy.";
+        }
+        return null;
     }
 
     public String comprobarStock(Cafe c, int agua){
@@ -65,6 +87,7 @@ public class Maquina {
         if(c.getGCafe() > gCafe) { return "No queda café.";}
         if(c.getGCacao() > gCacao) { return "No queda cacao.";}
         if(c.getGLeche() > gLeche) { return "No queda leche.";}
+        if(c.getGCanela() > gCanela) { return "No queda canela.";}
         if(agua > mlAgua){ return "No queda agua.";}
 
         return null; //retornar un error vacío como indicando que está todo correcto
@@ -75,6 +98,7 @@ public class Maquina {
         this.gCafe -= c.getGCafe(); //resta los gramos que necesite el café
         this.gCacao -= c.getGCacao();
         this.gLeche -= c.getGLeche();
+        this.gCanela -= c.getGCanela();
         this.mlAgua -= agua; //resta el agua
     }
 
@@ -110,6 +134,11 @@ public class Maquina {
                 vasos += cantidad;
                 break;
             }
+            case 6: {
+                verificarEspacio(cantidad, gCanela, MAX_CAP, "canela");
+                gCanela += cantidad;
+                break;
+            }
             default: {
                 throw new IllegalArgumentException("Opción no válida");
             }
@@ -139,6 +168,7 @@ public class Maquina {
                           + "[CACAO " + gCacao + "]\n" 
                           + "[LECHE " + gLeche + "]\n"
                           + "[AGUA " + mlAgua + "]\n"
+                          + "[CANELA " + gCanela + "]\n"
                           + "[VASOS " + vasos + "]");
     }
 

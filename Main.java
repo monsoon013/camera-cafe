@@ -2,7 +2,7 @@ import java.io.*; //llamamos a la librería io entera para poder acceder y crear
 import java.util.InputMismatchException; //llamamos al tipo de error
 import java.util.Scanner; //crear el scanner para introducir datos por pantalla
 
-
+//Defensa 20/02
 public class Main {
     public static void main(String[] args) {
         Maquina cameraCafe = new Maquina("X-133700"); //creamos la máquina
@@ -34,12 +34,14 @@ public class Main {
                         System.out.println("Gramos de leche: ");
                         int gramLech = sc.nextInt();
                         System.out.println("Gramos de cacao: ");
-                        int gramCacao = sc.nextInt();
+                        int gramCacao = sc.nextInt(); 
+                        System.out.println("Gramos de canela:");
+                        int gramCanela = sc.nextInt();
                         System.out.println("Precio del café:");
-                        double precioCafe = sc.nextDouble();
+                        double cafPrecio = sc.nextDouble();
 
-                        Cafe c = new Cafe(nomCaf, gramCaf, gramCacao, gramLech, precioCafe);
-                        cameraCafe.agregarReceta(c);
+                        Cafe c = new Cafe(nomCaf, gramCaf, gramCacao, gramLech, gramCanela, cafPrecio); //Pasar las variables independientes
+                        cameraCafe.agregarReceta(c); //agregamos el café a las recetas
                         break;
                     }
                     case 2: {
@@ -49,10 +51,10 @@ public class Main {
                         }
 
                         System.out.println("## MENÚ ##");
-                        int count = 1;
-                        for (Cafe c : cameraCafe.getCafes()){
+                        int count = 1; //contador para que salga como 1. {cafe} 2.{cafe}
+                        for (Cafe c : cameraCafe.getCafes()){ //Mostrar cada café
                             System.out.println(count + ". " + c.getNombre() + " - " + c.getPrecio());
-                            count++;
+                            count++; //Ir sumando uno por cada café
                         }
 
                         System.out.println("¿Qué café deseas?");
@@ -100,10 +102,8 @@ public class Main {
                         break;
                     }
                     case 6: {
-                       System.out.println(cameraCafe.getRecaudTotal()); 
-                        break;
-                    }
-                    case 7: {
+                        System.out.println("Cafés pedidos en el día de hoy: " + cameraCafe.getHistorial());
+                        System.out.println("Euros recaudados hoy: " + cameraCafe.getRecaudacionTotal());
                         System.out.println("Saliendo...");
                         break;
                     }
@@ -112,7 +112,8 @@ public class Main {
             }catch (InputMismatchException e){
                 System.out.println("Error: Introduce números: " + e.getMessage()); //Por si introduce un caracter
                 sc.nextLine();
-            }catch (Exception e){
+            }
+            catch (Exception e){
                 System.out.println("Error inesperado: " + e.getMessage()); //mostrar el error por si hay otro tipo de error
             }
             
