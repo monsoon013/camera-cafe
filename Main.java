@@ -2,7 +2,7 @@ import java.io.*; //llamamos a la librería io entera para poder acceder y crear
 import java.util.InputMismatchException; //llamamos al tipo de error
 import java.util.Scanner; //crear el scanner para introducir datos por pantalla
 
-
+//Defensa 20/02
 public class Main {
     public static void main(String[] args) {
         Maquina cameraCafe = new Maquina("X-133700"); //creamos la máquina
@@ -10,7 +10,7 @@ public class Main {
         int op = 0; 
 
 
-        while(op < 6){
+        while(op < 7){
             try { //Envolver todo en un try catch para recoger todo tipo de errores del usuario.
                 System.out.println("### BIENVENIDX ###");
                 System.out.println("1. Añadir Café");
@@ -18,8 +18,9 @@ public class Main {
                 System.out.println("3. Agregar Ingredientes");
                 System.out.println("4. Ver Historial");
                 System.out.println("5. Mostrar Recursos");
-                System.out.println("6. Salir");
-                System.out.println("¿Qué deseas hacer?");
+                System.out.println("6. Ver Recaudación");
+                System.out.println("7. Salir");
+                System.out.println("➤ ¿Qué deseas hacer?");
 
                 op = sc.nextInt();
                 sc.nextLine(); //limpieza del buffer

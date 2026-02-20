@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 
 public class Maquina {
-
     private String numeroSerie;
     private ArrayList<Cafe> cafes; 
     private int vasos;
@@ -91,7 +90,7 @@ public class Maquina {
         if(c.getGCanela() > gCanela) { return "No queda canela.";}
         if(agua > mlAgua){ return "No queda agua.";}
 
-        return null;
+        return null; //retornar un error vacío como indicando que está todo correcto
     }
 
     private void consumirIngredientes(Cafe c, int agua){ //Pasar el café y el agua necesaria obtenida en pedirCafe
