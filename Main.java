@@ -2,7 +2,7 @@ import java.io.*; //llamamos a la librería io entera para poder acceder y crear
 import java.util.InputMismatchException; //llamamos al tipo de error
 import java.util.Scanner; //crear el scanner para introducir datos por pantalla
 
-
+//Defensa 20/02
 public class Main {
     public static void main(String[] args) {
         Maquina cameraCafe = new Maquina("X-133700"); //creamos la máquina
